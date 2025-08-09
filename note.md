@@ -59,4 +59,32 @@ Route::apiResource('events.attendees', AttendeeController::class)
     ->scoped(['attendee' => 'event']);
   ```
 
+## API Resource 
+An API Resource is a class that formats data before sending it as a json response. This is useful when building an API where you want to control how your model data will appears in the response. 
+ - It acts like a `Transformer`
+
+### Generating API Resource 
+To generate a resource class, you may need to use the  `make:resource` artisan command 
+
+```
+php artisan make:resource EventResource
+php artisan make:resource UserResource
+php artisan make:resource AttendeeResource
+```
+
+```php
+ public function toArray(Request $request): array
+    {
+        return [
+            
+            'start_time' => $this->start_time,
+            'end_time' => $this->end_time,
+            'user' => new UserResource($this->whenLoaded('user')),
+            'attendees' => AttendeeResource::collection(
+                $this->whenLoaded('attendees')
+            )
+        ];
+    }
+```
+Now You have full controll, how your data appears in JSON.
 
