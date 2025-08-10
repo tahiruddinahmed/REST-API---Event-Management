@@ -88,3 +88,14 @@ php artisan make:resource AttendeeResource
 ```
 Now You have full controll, how your data appears in JSON.
 
+## Traits 
+ Traits are a PHP feature used to promote code reuse by allowing developers to group reusable methods in a single place and then include them in multiple classes. Traits are similar to classes but are designed to be included in other classes to extend their functionality without inheritance. This is particularly useful in 
+ Laravel, where traits are commonly used to share functionality across controllers, models, or other classes.
+
+## Santum 
+In Laravel, Sanctum is a lightweight authentication package designed to manage API authentication and issue API tokens for users, allowing secure access to your application's API endpoints. It is particularly useful for single-page applications (SPAs), mobile apps, or any client that needs to authenticate with a Laravel backend.
+
+Read more: https://laravel.com/docs/12.x/sanctum
+
+
+
