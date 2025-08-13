@@ -12,7 +12,6 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/login', [AuthController::class ,'login']);
 
-// Route::apiResource('events', EventController::class);
 
 // Public Route
 Route::apiResource('events', EventController::class)
