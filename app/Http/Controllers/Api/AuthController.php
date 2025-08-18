@@ -22,14 +22,14 @@ class AuthController extends Controller
         // find the user by email
         $user = User::where('email', $request->email)->first();
 
-        // check: if user exits 
+        // check: if user not exits 
         if(!$user) {
             throw ValidationException::withMessages([
                 'email' => ['provided credentials are incorrect!']
             ]);
         }
 
-        // if password is matched 
+        // if password is not matched 
         if(!Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'email' => ['provided credentials are incorrect!']

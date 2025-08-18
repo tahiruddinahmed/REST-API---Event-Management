@@ -7,6 +7,7 @@ use App\Http\Resources\EventResource;
 use App\Http\Traits\CanLoadRelationship;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -17,7 +18,6 @@ class EventController extends Controller
 
     public function index()
     {
-        // $query = $this->loadRelationships(Event::query(), $relations);
         $query = $this->loadRelationships(Event::query(), $this->relations);
 
         return EventResource::collection(
@@ -42,7 +42,7 @@ class EventController extends Controller
 
         $event = Event::create([
             ...$data,
-            'user_id' => 1
+            'user_id' => Auth::user()->id
         ]);
 
         return new EventResource($this->loadRelationships($event));
@@ -53,7 +53,6 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        // $event->load('user', 'attendees');
         return new EventResource($this->loadRelationships($event));
     }
 

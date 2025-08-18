@@ -12,6 +12,23 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/login', [AuthController::class ,'login']);
 
-Route::apiResource('events', EventController::class);
+// public route 
+Route::apiResource('events', EventController::class)
+    ->only(['index', 'show']);
+
+// protected route 
+Route::apiResource('events', EventController::class)
+    ->only(['store', 'update', 'destroy'])->middleware('auth:sanctum');
+
+// public route
 Route::apiResource('events.attendees', AttendeeController::class)
-    ->scoped()->except(['update']);
+    ->scoped()->only(['index', 'show']);
+
+// protected route 
+Route::apiResource('events.attendees', AttendeeController::class)
+    ->scoped()->only(['store', 'destroy'])
+    ->middleware('auth:sanctum');
+
+// Route::apiResource('events', EventController::class)->middleware('auth:sanctum');
+// Route::apiResource('events.attendees', AttendeeController::class)
+//     ->scoped()->except(['update']);
