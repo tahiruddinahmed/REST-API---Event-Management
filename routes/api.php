@@ -28,7 +28,3 @@ Route::apiResource('events', EventController::class)
 Route::apiResource('events.attendees', AttendeeController::class)
     ->scoped()->only(['store', 'destroy'])
     ->middleware('auth:sanctum');
-
-// Route::apiResource('events', EventController::class)->middleware('auth:sanctum');
-// Route::apiResource('events.attendees', AttendeeController::class)
-//     ->scoped()->except(['update']);
