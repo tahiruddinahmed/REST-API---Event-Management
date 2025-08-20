@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Attendee;
 use App\Models\Event;
 use App\Models\User;
+use App\Policies\AttendeePolicy;
 use App\Policies\EventPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -24,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::policy(Event::class, EventPolicy::class);
+        Gate::policy(Attendee::class, AttendeePolicy::class);
     }
 }

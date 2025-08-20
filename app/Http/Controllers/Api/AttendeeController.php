@@ -8,6 +8,7 @@ use App\Http\Traits\CanLoadRelationship;
 use App\Models\Attendee;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class AttendeeController extends Controller
 {
@@ -64,6 +65,7 @@ class AttendeeController extends Controller
      */
     public function destroy(string $event, Attendee $attendee)
     {
+        Gate::authorize('delete', $attendee);
         $attendee->delete();
 
         return response()->json([
