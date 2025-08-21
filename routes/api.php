@@ -17,14 +17,15 @@ Route::post('/logout', [AuthController::class, 'logout'])
 // public route 
 Route::apiResource('events', EventController::class)
     ->only(['index', 'show']);
+// Public Route
+Route::apiResource('events.attendees', AttendeeController::class)
+    ->scoped()    
+    ->only(['index', 'show']);
 
 // protected route 
 Route::apiResource('events', EventController::class)
     ->only(['store', 'update', 'destroy'])->middleware('auth:sanctum');
 
-// Public Route
-Route::apiResource('events', EventController::class)
-    ->only(['index', 'show']);
 
 // protected route 
 Route::apiResource('events.attendees', AttendeeController::class)

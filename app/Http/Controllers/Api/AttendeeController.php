@@ -28,6 +28,7 @@ class AttendeeController extends Controller
         return AttendeeResource::collection(
             $attendees->paginate(5)
         );
+        
     }
 
     /**
@@ -35,6 +36,8 @@ class AttendeeController extends Controller
      */
     public function store(Request $request, Event $event)
     {
+        Gate::authorize('create', Attendee::class);
+
         $attendee = $this->loadRelationships(
             $event->attendees()->create([
                 'user_id' => $request->user()->id 
@@ -50,14 +53,6 @@ class AttendeeController extends Controller
     public function show(string $event, Attendee $attendee)
     {
         return new AttendeeResource($this->loadRelationships($attendee));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
     }
 
     /**
