@@ -12,7 +12,7 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/login', [AuthController::class ,'login']);
 Route::post('/logout', [AuthController::class, 'logout'])
-    ->middleware('auth:sanctum');
+    ->middleware(['auth:sanctum', 'throttle:api']);
 
 // public route 
 Route::apiResource('events', EventController::class)
@@ -24,10 +24,10 @@ Route::apiResource('events.attendees', AttendeeController::class)
 
 // protected route 
 Route::apiResource('events', EventController::class)
-    ->only(['store', 'update', 'destroy'])->middleware('auth:sanctum');
+    ->only(['store', 'update', 'destroy'])->middleware(['auth:sanctum', 'throttle:event-limit']);
 
 
 // protected route 
 Route::apiResource('events.attendees', AttendeeController::class)
     ->scoped()->only(['store', 'destroy'])
-    ->middleware('auth:sanctum');
+    ->middleware(['auth:sanctum', 'throttle:api']);

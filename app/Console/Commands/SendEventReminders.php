@@ -49,6 +49,6 @@ class SendEventReminders extends Command
         );
 
         $this->info("Found {$eventCount} {$eventLabel}");
-        
+        $this->info("Reminder notifications sent successfully");
     }
 }
